@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Power Bites: Small Habits, Big Results</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      background-color: #6a1b9a;
+      color: white;
+      padding: 20px 0;
+      margin: 0;
+    }
+    p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+    #startButton {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 20px;
+      background-color: #8e24aa;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto;
+    }
+    .canvas-wrapper {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Power Bites</h1>
+  <p><em>Small Habits, Big Results</em></p>
+  <p>Science-Backed Steps for Your Energetic Phase of Life</p>
+
+  <div class="canvas-wrapper">
+    <button id="startButton">Start My Journey</button>
+  </div>
+
+  <!-- p5.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script>
+    let bannerImg;
+    let showImage = false;
+
+    function preload() {
+      bannerImg = loadImage('transformation_banner.png',
+        () => console.log("✅ Image loaded successfully"),
+        () => console.error("❌ Failed to load image")
+      );
+    }
+
+    function setup() {
+      const canvas = createCanvas(800, 400);
+      canvas.parent(document.querySelector('.canvas-wrapper'));
+
+      const btn = select('#startButton');
+      btn.mousePressed(() => {
+        showImage = true;
+        console.log("🚀 Start button clicked");
+      });
+    }
+
+    function draw() {
+  background(255);
+
+  if (showImage && bannerImg) {
+    let imgRatio = bannerImg.width / bannerImg.height;
+    let canvasRatio = width / height;
+
+    let w, h;
+
+    if (imgRatio > canvasRatio) {
+      // Image is wider
+      w = width;
+      h = width / imgRatio;
+    } else {
+      // Image is taller
+      h = height;
+      w = height * imgRatio;
+    }
+
+    image(bannerImg, (width - w) / 2, (height - h) / 2, w, h);
+  } else {
+    fill(80);
+    textSize(20);
+    textAlign(CENTER, CENTER);
+    text("Click 'Start My Journey' to begin.", width / 2, height / 2);
+  }
+}
+
+  </script>
+</body>
+</html>
+
